@@ -2,12 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const db = require('./src/infraestructure/persistence/mongodb');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventory');
-
-const {recipes, inventory, ingredients} =  require('./src/infraestructure/persistence/mongodb');
+const recipeRouter = require('./routes/recipeRoute');
 
 const app = express();
 
@@ -20,5 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/inventory', inventoryRouter);
+app.use('/recipe', recipeRouter);
 
 module.exports = app;

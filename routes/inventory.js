@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const Recipe = require('../src/domain/entities/recipe');
-const { isThereIngredientsAvailable } = require('../src/application/controllers/inventoryController');
+const { InventoryController } = require('../src/application/controllers/inventoryController');
 
-router.post('/availability',  isThereIngredientsAvailable);
+router.post('/availability',  (req, res) => {
+    const  inventoryController = new InventoryController();
+    inventoryController.isThereIngredientsAvailable(req, res);
+} );
 
 router.put('/', (req, res) => {
     /*let recipe = new recipe(req.body);
