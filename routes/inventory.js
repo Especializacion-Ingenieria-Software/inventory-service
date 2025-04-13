@@ -10,10 +10,8 @@ router.post('/availability',  (req, res) => {
 } );
 
 router.put('/', (req, res) => {
-    /*let recipe = new recipe(req.body);
-    res.status(200).send();*/
-    console.log(req);
-    console.log(res.body);
+    const  inventoryController = new InventoryController();
+    inventoryController.updateInventory(req, res);
 });
 
 module.exports = router;

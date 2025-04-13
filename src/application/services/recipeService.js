@@ -18,7 +18,6 @@ class RecipeService {
             .catch(err => {
                 console.log(err);
                 return { error: true, message: err.message }
-
             });
     }
 }

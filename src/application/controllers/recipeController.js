@@ -41,7 +41,6 @@ class RecipeController {
                     //response = {success: true, data: res};
                     console.log(response);
                     return {success: true, data: res};
-                    //return response;
                 }).catch(err => response = {success: false, error: err });
             ;
         return res.status(200).send(result);

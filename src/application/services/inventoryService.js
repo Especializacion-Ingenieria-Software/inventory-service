@@ -22,14 +22,21 @@ class InventoryService {
                 error => {console.log(error); return 0});
 
         return availableInventory;
-    /*return  this.inventoryRepository.getInventoryByIngredientId(ingredients);
-            .then(data => {
-                console.log('data', data);
-                return data;
-            })
-            .catch(err => console.log('error', err));
-*/
-        //}
+    }
+
+    async updateInventory(recipeIngredients) {
+        let success = false;
+        for (let ingredient of recipeIngredients) {
+            let ingredient = await this.inventoryRepository.getInventoryByIngredientId(ingredient[ingredient])
+                .then(inventory => this.mapResponseToSchema(inventory));
+            let quantityUpdated = ingredient.quantity - ingredient[ingredient].quantity;
+            await this.inventoryRepository.updateInventory(ingredient[ingredient].id, quantityUpdated)
+                .then(inventory => {
+                    success = true;
+                    console.log('updated', inventory);
+                });
+        }
+        return success;
     }
 
     mapResponseToSchema(item) {
