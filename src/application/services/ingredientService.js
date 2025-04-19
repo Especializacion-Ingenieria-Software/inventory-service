@@ -13,9 +13,10 @@ class IngredientService {
             .then(ingredient => {
                 return ingredient;
             })
-            .error(err => {
+            .catch(err => {
                 return err;
             });
+        return ingredient;
     }
 
     async getIngredientByName(ingredientName) {
@@ -23,9 +24,10 @@ class IngredientService {
             .then(ingredient => {
                 return ingredient;
             })
-            .error(err => {
+            .catch(err => {
                 return err;
             });
+        return ingredient
     }
 }
 

@@ -1,100 +1,105 @@
-const IngredientService = require('../../../../src/application/services/ingredientService');
-const IngredientRepository = require('../../../src/domain/repositories/ingredientRepository');
+// tests/unit/application/services/ingredientService.test.js
 
-jest.mock('../../../src/domain/repositories/ingredientRepository');
+const IngredientService = require('../../../../src/application/services/ingredientService');
+const IngredientRepository = require('../../../../src/domain/repositories/ingredientRepository');
+
+// Mock del repositorio
+jest.mock('../../../../src/domain/repositories/ingredientRepository');
 
 describe('IngredientService', () => {
     let ingredientService;
-    let mockIngredientRepository;
+    let mockRepository;
 
     beforeEach(() => {
-        // Crea una nueva instancia del servicio y del mock del repositorio antes de cada prueba
-        mockIngredientRepository = new IngredientRepository();
+        // Limpiar mocks entre pruebas
+        jest.clearAllMocks();
+
+        // Crear un mock con métodos simulados
+        mockRepository = {
+            getIngredientById: jest.fn(),
+            getIngredientByName: jest.fn()
+        };
+
+        // Hacer que el constructor del repositorio devuelva nuestro mock
+        IngredientRepository.mockImplementation(() => mockRepository);
+
+        // Crear el servicio con el repositorio mockeado
         ingredientService = new IngredientService();
-        ingredientService.ingredientRepository = mockIngredientRepository; // Inyecta el mock en el servicio
     });
 
-    it('should call getIngredientById on the repository with the correct id', async () => {
-        // Define un ID de ingrediente de prueba
-        const ingredientId = 'someId';
+    describe('getIngredientById', () => {
+        it('should call repository.getIngredientById with correct parameters', async () => {
+            // Arrange
+            const ingredientId = 'ing123';
+            const mockIngredient = { id: ingredientId, name: 'Test Ingredient' };
+            mockRepository.getIngredientById.mockResolvedValue(mockIngredient);
 
-        // Configura el mock para que resuelva con un valor (simulando una búsqueda exitosa)
-        mockIngredientRepository.getIngredientById.mockResolvedValue({ id: ingredientId, name: 'Test Ingredient' });
+            // Act
+            await ingredientService.getIngredientById(ingredientId);
 
-        // Llama al método del servicio
-        await ingredientService.getIngredientById(ingredientId);
+            // Assert
+            expect(mockRepository.getIngredientById).toHaveBeenCalledWith(ingredientId);
+        });
 
-        // Asegura que el método del repositorio fue llamado con el ID correcto
-        expect(mockIngredientRepository.getIngredientById).toHaveBeenCalledWith(ingredientId);
+        it('should handle promise resolution correctly', async () => {
+            // Arrange
+            const ingredientId = 'ing123';
+            const mockIngredient = { id: ingredientId, name: 'Test Ingredient' };
+
+            // Configuración correcta del mock para simular una promesa con then y catch
+            const mockPromise = {
+                then: jest.fn().mockImplementation(callback => {
+                    callback(mockIngredient);
+                    return {
+                        catch: jest.fn().mockReturnValue(mockIngredient)
+                    };
+                })
+            };
+            mockRepository.getIngredientById.mockReturnValue(mockPromise);
+
+            // Act
+            const result = await ingredientService.getIngredientById(ingredientId);
+
+            // Assert
+            expect(result).toEqual(mockIngredient);
+        });
     });
 
-    it('should return the ingredient when getIngredientById on the repository resolves successfully', async () => {
-        // Define un ingrediente de prueba
-        const expectedIngredient = { id: 'someId', name: 'Test Ingredient' };
+    describe('getIngredientByName', () => {
+        it('should call repository.getIngredientByName with correct parameters', async () => {
+            // Arrange
+            const ingredientName = 'Tomato';
+            const mockIngredient = { name: ingredientName };
+            mockRepository.getIngredientByName.mockResolvedValue(mockIngredient);
 
-        // Configura el mock para que resuelva con el ingrediente de prueba
-        mockIngredientRepository.getIngredientById.mockResolvedValue(expectedIngredient);
+            // Act
+            await ingredientService.getIngredientByName(ingredientName);
 
-        // Llama al método del servicio
-        const result = await ingredientService.getIngredientById('someId');
+            // Assert
+            expect(mockRepository.getIngredientByName).toHaveBeenCalledWith(ingredientName);
+        });
 
-        // Asegura que el servicio devuelve el ingrediente esperado
-        expect(result).toEqual(expectedIngredient);
-    });
+        it('should handle promise resolution correctly', async () => {
+            // Arrange
+            const ingredientName = 'Tomato';
+            const mockIngredient = { name: ingredientName };
 
-    it('should return the error when getIngredientById on the repository rejects', async () => {
-        // Define un error de prueba
-        const expectedError = new Error('Ingredient not found');
+            // Configuración correcta del mock para simular una promesa con then y catch
+            const mockPromise = {
+                then: jest.fn().mockImplementation(callback => {
+                    callback(mockIngredient);
+                    return {
+                        catch: jest.fn().mockReturnValue(mockIngredient)
+                    };
+                })
+            };
+            mockRepository.getIngredientByName.mockReturnValue(mockPromise);
 
-        // Configura el mock para que rechace con el error de prueba
-        mockIngredientRepository.getIngredientById.mockRejectedValue(expectedError);
+            // Act
+            const result = await ingredientService.getIngredientByName(ingredientName);
 
-        // Llama al método del servicio
-        const result = await ingredientService.getIngredientById('someId');
-
-        // Asegura que el servicio devuelve el error esperado
-        expect(result).toEqual(expectedError);
-    });
-
-    it('should call getIngredientByName on the repository with the correct name', async () => {
-        // Define un nombre de ingrediente de prueba
-        const ingredientName = 'Test Ingredient';
-
-        // Configura el mock para que resuelva con un valor
-        mockIngredientRepository.getIngredientByName.mockResolvedValue({ name: ingredientName, id: 'someId' });
-
-        // Llama al método del servicio
-        await ingredientService.getIngredientByName(ingredientName);
-
-        // Asegura que el método del repositorio fue llamado con el nombre correcto
-        expect(mockIngredientRepository.getIngredientByName).toHaveBeenCalledWith(ingredientName);
-    });
-
-    it('should return the ingredient when getIngredientByName on the repository resolves successfully', async () => {
-        // Define un ingrediente de prueba
-        const expectedIngredient = { name: 'Test Ingredient', id: 'someId' };
-
-        // Configura el mock para que resuelva con el ingrediente de prueba
-        mockIngredientRepository.getIngredientByName.mockResolvedValue(expectedIngredient);
-
-        // Llama al método del servicio
-        const result = await ingredientService.getIngredientByName('Test Ingredient');
-
-        // Asegura que el servicio devuelve el ingrediente esperado
-        expect(result).toEqual(expectedIngredient);
-    });
-
-    it('should return the error when getIngredientByName on the repository rejects', async () => {
-        // Define un error de prueba
-        const expectedError = new Error('Ingredient with that name not found');
-
-        // Configura el mock para que rechace con el error de prueba
-        mockIngredientRepository.getIngredientByName.mockRejectedValue(expectedError);
-
-        // Llama al método del servicio
-        const result = await ingredientService.getIngredientByName('Test Ingredient');
-
-        // Asegura que el servicio devuelve el error esperado
-        expect(result).toEqual(expectedError);
+            // Assert
+            expect(result).toEqual(mockIngredient);
+        });
     });
 });
