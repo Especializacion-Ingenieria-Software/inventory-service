@@ -106,4 +106,9 @@ inventory-service/
 npm install --save-dev jest supertest mongoose-mock mongodb-memory-server
 npx jest tests\\unit\\domain\\entities\\ingredient.test.js
 
+npm test -- --coverage
+npm test -- --verbose
+
+
+
 ```                      
