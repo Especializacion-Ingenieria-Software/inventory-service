@@ -99,4 +99,11 @@ inventory-service/
 │   │   └── resources/      
 │   └── test/     
 └── pom.xml
-```                               
+```                      
+
+### importan comands about unit test
+```bash
+npm install --save-dev jest supertest mongoose-mock mongodb-memory-server
+npx jest tests\\unit\\domain\\entities\\ingredient.test.js
+
+```                      
