@@ -3,7 +3,7 @@ const Recipe = require("../../infraestructure/persistence/Recipe");
 class RecipeRepository {
 
     saveRecipe(recipe) {
-        console.log('reopository', recipe);
+        console.log('repository', recipe);
         const recipeModel = new Recipe({
             name: recipe.name,
             description: recipe.description,
