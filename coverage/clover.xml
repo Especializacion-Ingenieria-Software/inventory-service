@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745039282128" clover="3.2.0">
-  <project timestamp="1745039282128" name="All files">
-    <metrics statements="129" coveredstatements="108" conditionals="18" coveredconditionals="15" methods="49" coveredmethods="38" elements="196" coveredelements="161" complexity="0" loc="129" ncloc="129" packages="5" files="15" classes="15"/>
+<coverage generated="1745282628302" clover="3.2.0">
+  <project timestamp="1745282628302" name="All files">
+    <metrics statements="126" coveredstatements="105" conditionals="20" coveredconditionals="17" methods="49" coveredmethods="38" elements="195" coveredelements="160" complexity="0" loc="126" ncloc="126" packages="5" files="15" classes="15"/>
     <package name="application.controllers">
-      <metrics statements="43" coveredstatements="33" conditionals="18" coveredconditionals="15" methods="15" coveredmethods="10"/>
+      <metrics statements="39" coveredstatements="29" conditionals="18" coveredconditionals="15" methods="15" coveredmethods="10"/>
       <file name="inventoryController.js" path="D:\Especializacion\Primer_Semestre\ConstruccionSoftware\inventory-service\src\application\controllers\inventoryController.js">
         <metrics statements="20" coveredstatements="12" conditionals="12" coveredconditionals="9" methods="7" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
@@ -28,7 +28,7 @@
         <line num="58" count="1" type="stmt"/>
       </file>
       <file name="recipeController.js" path="D:\Especializacion\Primer_Semestre\ConstruccionSoftware\inventory-service\src\application\controllers\recipeController.js">
-        <metrics statements="23" coveredstatements="21" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="6"/>
+        <metrics statements="19" coveredstatements="17" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -44,14 +44,10 @@
         <line num="30" count="1" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
         <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
       </file>
     </package>
     <package name="application.services">
@@ -159,7 +155,7 @@
       </file>
     </package>
     <package name="infraestructure.persistence">
-      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="19" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="Ingredient.js" path="D:\Especializacion\Primer_Semestre\ConstruccionSoftware\inventory-service\src\infraestructure\persistence\Ingredient.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
@@ -182,13 +178,14 @@
         <line num="16" count="4" type="stmt"/>
       </file>
       <file name="mongodb.js" path="D:\Especializacion\Primer_Semestre\ConstruccionSoftware\inventory-service\src\infraestructure\persistence\mongodb.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
+        <line num="5" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
       </file>
     </package>
   </project>
