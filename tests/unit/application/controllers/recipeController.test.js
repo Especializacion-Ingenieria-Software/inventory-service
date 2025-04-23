@@ -116,7 +116,7 @@ describe('RecipeController', () => {
             mockRecipeService.findRecipe.mockResolvedValue(mockServiceResult);
 
             // Act
-            recipeController.findRecipe(mockRequest, mockResponse);
+            await recipeController.findRecipe(mockRequest, mockResponse);
 
             // Assert
             expect(mockRecipeService.findRecipe).toHaveBeenCalledWith(mockRequest.params.name);
@@ -132,7 +132,7 @@ describe('RecipeController', () => {
             mockRecipeService.findRecipe.mockRejectedValue(mockError);
 
             // Act
-            recipeController.findRecipe(mockRequest, mockResponse);
+            await recipeController.findRecipe(mockRequest, mockResponse);
 
             // Assert
             expect(mockRecipeService.findRecipe).toHaveBeenCalledWith(mockRequest.params.name);
