@@ -30,18 +30,13 @@ class RecipeController {
         return res.status(HTTP_CREATED).send(response, result);
     }
 
-    findRecipe(req, res) {
+    async findRecipe(req, res) {
         const recipeName = req.params.name;
-        console.log(recipeName)
-        let response = {};
-        const result =  this.recipeService.findRecipe(recipeName)
+        const result = await this.recipeService.findRecipe(recipeName)
             .then(
-                res => {
-                    console.log('promesa resuelta');
-                    //response = {success: true, data: res};
-                    console.log(response);
-                    return {success: true, data: res};
-                }).catch(err => response = {success: false, error: err });
+                response => {
+                    return {success: true, data: response};
+                }).catch(err => ({success: false, error: err }));
             ;
         return res.status(200).send(result);
     }
